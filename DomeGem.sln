@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomeGym.Domain", "DomeGym.Domain\DomeGym.Domain.csproj", "{03C60114-F62F-4566-AB30-195658E2DDF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomeGym.Domain.UnitTest", "DomeGym.Domain.UnitTest\DomeGym.Domain.UnitTest.csproj", "{2DAD6231-7502-46C6-9E26-FBC69A419B06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03C60114-F62F-4566-AB30-195658E2DDF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03C60114-F62F-4566-AB30-195658E2DDF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03C60114-F62F-4566-AB30-195658E2DDF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03C60114-F62F-4566-AB30-195658E2DDF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DAD6231-7502-46C6-9E26-FBC69A419B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DAD6231-7502-46C6-9E26-FBC69A419B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DAD6231-7502-46C6-9E26-FBC69A419B06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DAD6231-7502-46C6-9E26-FBC69A419B06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
