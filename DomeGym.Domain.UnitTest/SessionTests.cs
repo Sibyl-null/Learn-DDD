@@ -1,6 +1,7 @@
 ﻿using DomeGym.Domain.UnitTest.TestConstants;
 using DomeGym.Domain.UnitTest.TestUtils.Participants;
 using DomeGym.Domain.UnitTest.TestUtils.Sessions;
+using ErrorOr;
 using FluentAssertions;
 using NSubstitute;
 
@@ -17,11 +18,13 @@ public class SessionTests
         var participant2 = ParticipantFactory.CreateParticipant(id: Guid.NewGuid(), userId: Guid.NewGuid());
         
         // Act
-        session.ReserveSpot(participant1);
-        Action action = () => session.ReserveSpot(participant2);
+        ErrorOr<Success> result1 = session.ReserveSpot(participant1);
+        ErrorOr<Success> result2 =session.ReserveSpot(participant2);
         
         // Assert
-        action.Should().Throw<Exception>();
+        result1.IsError.Should().BeFalse();
+        result2.IsError.Should().BeTrue();
+        result2.FirstError.Should().Be(SessionErrors.CannotHaveMoreReservationsThanParticipants);
     }
 
     [Fact(DisplayName = "临近课程开始时，禁止取消预约")]
@@ -34,15 +37,17 @@ public class SessionTests
             endTime: Constants.Session.EndTime);
         
         var participant = ParticipantFactory.CreateParticipant();
-        session.ReserveSpot(participant);
+        ErrorOr<Success> reserveResult = session.ReserveSpot(participant);
 
         IDateTimeProvider timeProvider = Substitute.For<IDateTimeProvider>();
         timeProvider.UtcNow.Returns(Constants.Session.Date.ToDateTime(TimeOnly.MinValue));
 
         // Act
-        Action action = () => session.CancelReservation(participant, timeProvider);
-        
+        ErrorOr<Success> cancelResult = session.CancelReservation(participant, timeProvider);
+
         // Assert
-        action.Should().Throw<Exception>();
+        reserveResult.IsError.Should().BeFalse();
+        cancelResult.IsError.Should().BeTrue();
+        cancelResult.FirstError.Should().Be(SessionErrors.CannotCancelReservationTooCloseToSession);
     }
 }
