@@ -9,6 +9,6 @@ public static partial class Constants
         public static readonly TimeOnly StartTime = TimeOnly.MinValue.AddHours(8);
         public static readonly TimeOnly EndTime = TimeOnly.MinValue.AddHours(9);
         
-        public const int MaxParticipants = 10;
+        public const int MaxParticipantCount = 10;
     }
 }

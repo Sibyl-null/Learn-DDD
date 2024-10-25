@@ -7,16 +7,16 @@ public class Session
     private readonly Guid _id;
     private readonly Guid _trainerId;
     private readonly List<Guid> _participantIds = new();
-    private readonly int _maxParticipants;
+    private readonly int _maxParticipantCount;
     private readonly DateOnly _date;
     private readonly TimeOnly _startTime;
     private readonly TimeOnly _endTime;
 
-    public Session(Guid? id, Guid trainerId, int maxParticipants, DateOnly date, TimeOnly startTime, TimeOnly endTime)
+    public Session(Guid? id, Guid trainerId, int maxParticipantCount, DateOnly date, TimeOnly startTime, TimeOnly endTime)
     {
         _id = id ?? Guid.NewGuid();
         _trainerId = trainerId;
-        _maxParticipants = maxParticipants;
+        _maxParticipantCount = maxParticipantCount;
         _date = date;
         _startTime = startTime;
         _endTime = endTime;
@@ -24,7 +24,7 @@ public class Session
 
     public ErrorOr<Success> ReserveSpot(Participant participant)
     {
-        if (_participantIds.Count >= _maxParticipants)
+        if (_participantIds.Count >= _maxParticipantCount)
             return SessionErrors.CannotHaveMoreReservationsThanParticipants;
 
         _participantIds.Add(participant.Id);
