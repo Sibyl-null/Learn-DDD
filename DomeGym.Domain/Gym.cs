@@ -4,13 +4,14 @@ namespace DomeGym.Domain;
 
 public class Gym
 {
-    private readonly Guid _id;
     private readonly List<Guid> _roomIds = new();
     private readonly int _maxRoomCount;
 
+    public Guid Id { get; }
+
     public Gym(Guid? id, int maxRoomCount)
     {
-        _id = id ?? Guid.NewGuid();
+        Id = id ?? Guid.NewGuid();
         _maxRoomCount = maxRoomCount;
     }
 
