@@ -31,11 +31,7 @@ public class SessionTests
     public void CancelReservation_WhenTooCloseToSessionStart_ShouldFailCancellation()
     {
         // Arrange
-        var session = SessionFactory.CreateSession(
-            date: Constants.Session.Date,
-            startTime: Constants.Session.StartTime,
-            endTime: Constants.Session.EndTime);
-        
+        var session = SessionFactory.CreateSession();
         var participant = ParticipantFactory.CreateParticipant();
         ErrorOr<Success> reserveResult = session.ReserveSpot(participant);
 

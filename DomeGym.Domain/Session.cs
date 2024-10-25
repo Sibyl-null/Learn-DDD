@@ -8,19 +8,17 @@ public class Session
     private readonly List<Guid> _participantIds = new();
     private readonly int _maxParticipantCount;
     private readonly DateOnly _date;
-    private readonly TimeOnly _startTime;
-    private readonly TimeOnly _endTime;
+    private readonly TimeRange _time;
     
     public Guid Id { get; }
 
-    public Session(Guid? id, Guid trainerId, int maxParticipantCount, DateOnly date, TimeOnly startTime, TimeOnly endTime)
+    public Session(Guid? id, Guid trainerId, int maxParticipantCount, DateOnly date, TimeRange time)
     {
         Id = id ?? Guid.NewGuid();
         _trainerId = trainerId;
         _maxParticipantCount = maxParticipantCount;
         _date = date;
-        _startTime = startTime;
-        _endTime = endTime;
+        _time = time;
     }
 
     public ErrorOr<Success> ReserveSpot(Participant participant)
@@ -46,6 +44,6 @@ public class Session
     private bool IsTooCloseToSession(DateTime utcNow)
     {
         const int minHours = 24;
-        return (_date.ToDateTime(_startTime) - utcNow).TotalHours < minHours;
+        return (_date.ToDateTime(_time.Start) - utcNow).TotalHours < minHours;
     }
 }

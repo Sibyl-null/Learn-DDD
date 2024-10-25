@@ -9,15 +9,13 @@ public static class SessionFactory
         Guid? trainerId = null,
         int maxParticipantCount = Constants.Session.MaxParticipantCount,
         DateOnly? date = null,
-        TimeOnly? startTime = null,
-        TimeOnly? endTime = null)
+        TimeRange? time = null)
     {
         return new Session(
             id: id ?? Constants.Session.Id,
             trainerId: trainerId ?? Constants.Trainer.Id,
             maxParticipantCount: maxParticipantCount,
             date: date ?? Constants.Session.Date,
-            startTime: startTime ?? Constants.Session.StartTime,
-            endTime: endTime ?? Constants.Session.EndTime);
+            time: time ?? Constants.Session.Time);
     }
 }
