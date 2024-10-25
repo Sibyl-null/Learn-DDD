@@ -7,7 +7,7 @@ namespace DomeGym.Domain.UnitTest;
 
 public class GymTests
 {
-    [Fact(DisplayName = "当房间数超过订阅额度时，无法添加房间")]
+    [Fact]
     public void AddRoom_WhenMoreThanSubscriptionAllows_ShouldFail()
     {
         // Arrange

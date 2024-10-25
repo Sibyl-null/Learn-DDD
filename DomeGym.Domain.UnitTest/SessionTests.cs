@@ -9,7 +9,7 @@ namespace DomeGym.Domain.UnitTest;
 
 public class SessionTests
 {
-    [Fact(DisplayName = "超过参与者最大数量时，预约失败")]
+    [Fact]
     public void ReserveSpot_WhenNoMoreSpot_ShouldFailReservation()
     {
         // Arrange
@@ -27,7 +27,7 @@ public class SessionTests
         result2.FirstError.Should().Be(SessionErrors.CannotHaveMoreReservationsThanParticipants);
     }
 
-    [Fact(DisplayName = "临近课程开始时，禁止取消预约")]
+    [Fact]
     public void CancelReservation_WhenTooCloseToSessionStart_ShouldFailCancellation()
     {
         // Arrange
