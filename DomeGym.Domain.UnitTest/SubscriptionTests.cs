@@ -11,17 +11,21 @@ public class SubscriptionTests
     public void AddGym_WhenMoreThanSubscriptionAllows_ShouldFail()
     {
         // Arrange
-        var subscription = SubscriptionFactory.CreateSubscription(maxGymCount: 1);
-        var gym1 = GymFactory.CreateGym(id: Guid.NewGuid());
-        var gym2 = GymFactory.CreateGym(id: Guid.NewGuid());
-        
+        Subscription subscription = SubscriptionFactory.CreateSubscription();
+        List<Gym> gyms = Enumerable.Range(0, subscription.GetMaxGymCount() + 1)
+            .Select(_ => GymFactory.CreateGym(id: Guid.NewGuid()))
+            .ToList();
+
         // Act
-        ErrorOr<Success> addResult1 = subscription.AddGym(gym1);
-        ErrorOr<Success> addResult2 = subscription.AddGym(gym2);
+        List<ErrorOr<Success>> results = gyms.ConvertAll(subscription.AddGym);
 
         // Assert
-        addResult1.IsError.Should().BeFalse();
-        addResult2.IsError.Should().BeTrue();
-        addResult2.FirstError.Should().Be(SubscriptionErrors.CannotHaveMoreGymsThanSubscriptionAllows);
+        results.Take(..^1)
+            .Should()
+            .AllSatisfy(result => result.IsError.Should().BeFalse());
+
+        ErrorOr<Success> lastResult = results.Last();
+        lastResult.IsError.Should().BeTrue();
+        lastResult.FirstError.Should().Be(SubscriptionErrors.CannotHaveMoreGymsThanSubscriptionAllows);
     }
 }

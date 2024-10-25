@@ -5,7 +5,6 @@ public static partial class Constants
     public static class Subscription
     {
         public static readonly Guid Id = Guid.NewGuid();
-        
-        public const int MaxGymCount = 10;
+        public static readonly SubscriptionType DefaultSubscriptionType = SubscriptionType.Free;
     }
 }
