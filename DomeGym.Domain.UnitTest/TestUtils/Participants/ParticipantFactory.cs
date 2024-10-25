@@ -4,7 +4,7 @@ namespace DomeGym.Domain.UnitTest.TestUtils.Participants;
 
 public static class ParticipantFactory
 {
-    public static Participant CreateParticipant(Guid? id, Guid? userId)
+    public static Participant CreateParticipant(Guid? id = null, Guid? userId = null)
     {
         return new Participant(
             id: id ?? Constants.Participant.Id,
