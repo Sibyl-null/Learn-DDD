@@ -1,4 +1,5 @@
-﻿using DomeGym.Domain.UnitTest.TestUtils.Common;
+﻿using DomeGym.Domain.ParticipantAggregate;
+using DomeGym.Domain.UnitTest.TestUtils.Common;
 using DomeGym.Domain.UnitTest.TestUtils.Participants;
 using DomeGym.Domain.UnitTest.TestUtils.Sessions;
 using ErrorOr;

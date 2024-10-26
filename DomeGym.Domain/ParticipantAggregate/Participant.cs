@@ -1,17 +1,19 @@
+using DomeGym.Domain.Common;
+using DomeGym.Domain.Common.Entities;
+using DomeGym.Domain.SessionAggregate;
 using ErrorOr;
 
-namespace DomeGym.Domain;
+namespace DomeGym.Domain.ParticipantAggregate;
 
-public class Trainer
+public class Participant : AggregateRoot
 {
-    private readonly Guid _id;
     private readonly Guid _userId;
     private readonly Schedule _schedule = Schedule.Empty();
     private readonly List<Guid> _sessionIds = new();
 
-    public Trainer(Guid? id, Guid userId)
+    public Participant(Guid? id, Guid userId) 
+        : base(id ?? Guid.NewGuid())
     {
-        _id = id ?? Guid.NewGuid();
         _userId = userId;
     }
 
@@ -24,7 +26,7 @@ public class Trainer
         if (boolResult.IsError)
         {
             return boolResult.FirstError.Type == ErrorType.Conflict
-                ? TrainerErrors.CannotHaveTwoOrMoreOverlappingSessions
+                ? ParticipantErrors.CannotHaveTwoOrMoreOverlappingSessions
                 : boolResult.Errors;
         }
 

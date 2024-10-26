@@ -1,4 +1,5 @@
-﻿using DomeGym.Domain.UnitTest.TestUtils.Gyms;
+﻿using DomeGym.Domain.GymAggregate;
+using DomeGym.Domain.UnitTest.TestUtils.Gyms;
 using DomeGym.Domain.UnitTest.TestUtils.Rooms;
 using ErrorOr;
 using FluentAssertions;
