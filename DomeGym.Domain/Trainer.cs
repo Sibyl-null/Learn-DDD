@@ -6,13 +6,13 @@ public class Trainer
 {
     private readonly Guid _id;
     private readonly Guid _userId;
-    private readonly Schedule _schedule;
+    private readonly Schedule _schedule = Schedule.Empty();
     private readonly List<Guid> _sessionIds = new();
 
-    public Trainer(Guid? id, Schedule? schedule = null)
+    public Trainer(Guid? id, Guid userId)
     {
-        _schedule = schedule ?? Schedule.Empty();
         _id = id ?? Guid.NewGuid();
+        _userId = userId;
     }
 
     public ErrorOr<Success> AddSessionToSchedule(Session session)
@@ -21,8 +21,12 @@ public class Trainer
             return Error.Conflict($"Session {session.Id} already added to schedule");
 
         ErrorOr<Success> boolResult = _schedule.BookTimeSlot(session.Date, session.Time);
-        if (boolResult is { IsError: true, FirstError.Type: ErrorType.Conflict })
-            return TrainerErrors.CannotHaveTwoOrMoreOverlappingSessions;
+        if (boolResult.IsError)
+        {
+            return boolResult.FirstError.Type == ErrorType.Conflict
+                ? TrainerErrors.CannotHaveTwoOrMoreOverlappingSessions
+                : boolResult.Errors;
+        }
 
         _sessionIds.Add(session.Id);
         return Result.Success;

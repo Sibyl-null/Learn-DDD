@@ -22,8 +22,12 @@ public class Participant
             return Error.Conflict($"Session {session.Id} already added to schedule");
 
         ErrorOr<Success> boolResult = _schedule.BookTimeSlot(session.Date, session.Time);
-        if (boolResult is { IsError: true, FirstError.Type: ErrorType.Conflict })
-            return ParticipantErrors.CannotHaveTwoOrMoreOverlappingSessions;
+        if (boolResult.IsError)
+        {
+            return boolResult.FirstError.Type == ErrorType.Conflict
+                ? ParticipantErrors.CannotHaveTwoOrMoreOverlappingSessions
+                : boolResult.Errors;
+        }
 
         _sessionIds.Add(session.Id);
         return Result.Success;
