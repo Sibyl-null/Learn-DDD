@@ -20,7 +20,7 @@ public class Subscription : AggregateRoot
     public ErrorOr<Success> AddGym(Gym gym)
     {
         if (_gymIds.Contains(gym.Id))
-            return Error.Conflict($"Gym {gym.Id} already added to subscription");
+            return Error.Conflict(description: $"Gym {gym.Id} already added to subscription");
         
         if (_gymIds.Count >= GetMaxGymCount())
             return SubscriptionErrors.CannotHaveMoreGymsThanSubscriptionAllows;

@@ -20,7 +20,7 @@ public class Gym : AggregateRoot
     public ErrorOr<Success> AddRoom(Room room)
     {
         if (_roomIds.Contains(room.Id))
-            return Error.Conflict($"Room {room.Id} already exists in the gym.");
+            return Error.Conflict(description: $"Room {room.Id} already exists in the gym.");
 
         if (_roomIds.Count >= _maxRoomCount)
             return GymErrors.CannotHaveMoreRoomsThanSubscriptionAllows;

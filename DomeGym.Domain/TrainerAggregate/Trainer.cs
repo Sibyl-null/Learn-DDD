@@ -20,7 +20,7 @@ public class Trainer : AggregateRoot
     public ErrorOr<Success> AddSessionToSchedule(Session session)
     {
         if (_sessionIds.Contains(session.Id))
-            return Error.Conflict($"Session {session.Id} already added to schedule");
+            return Error.Conflict(description: $"Session {session.Id} already added to schedule");
 
         ErrorOr<Success> boolResult = _schedule.BookTimeSlot(session.Date, session.Time);
         if (boolResult.IsError)

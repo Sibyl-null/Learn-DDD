@@ -22,7 +22,7 @@ public class Room : AggregateRoot
     public ErrorOr<Success> ScheduleSession(Session session)
     {
         if (_sessionIds.Contains(session.Id))
-            return Error.Conflict($"Session {session.Id} already scheduled in this room.");
+            return Error.Conflict(description: $"Session {session.Id} already scheduled in this room.");
         
         if (_sessionIds.Count >= _maxDailySessionCount)
             return RoomErrors.CannotHaveMoreSessionThanSubscriptionAllows;
