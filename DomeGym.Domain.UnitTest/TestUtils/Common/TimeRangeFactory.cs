@@ -15,9 +15,9 @@ public static class TimeRangeFactory
         endHour.Throw()
             .IfLessThan(1)
             .IfGreaterThan(24);
-        
-        return new TimeRange(
+
+        return TimeRange.FromTimeOnly(
             start: TimeOnly.MinValue.AddHours(startHour),
-            end: TimeOnly.MinValue.AddHours(endHour));
+            end: TimeOnly.MinValue.AddHours(endHour)).Value;
     }
 }
