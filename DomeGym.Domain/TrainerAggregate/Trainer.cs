@@ -11,7 +11,7 @@ public class Trainer : AggregateRoot
     private readonly Schedule _schedule = Schedule.Empty();
     private readonly List<Guid> _sessionIds = new();
 
-    public Trainer(Guid? id, Guid userId) 
+    public Trainer(Guid userId, Guid? id = null)
         : base(id ?? Guid.NewGuid())
     {
         _userId = userId;

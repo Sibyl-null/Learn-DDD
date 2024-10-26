@@ -12,7 +12,7 @@ public class Room : AggregateRoot
     private readonly List<Guid> _sessionIds = new();
     private readonly Schedule _schedule = Schedule.Empty();
     
-    public Room(Guid? id, int maxDailySessionCount, Guid gymId) 
+    public Room(int maxDailySessionCount, Guid gymId, Guid? id = null)
         : base(id ?? Guid.NewGuid())
     {
         _maxDailySessionCount = maxDailySessionCount;

@@ -10,7 +10,7 @@ public class Subscription : AggregateRoot
     private readonly SubscriptionType _subscriptionType;
     private readonly List<Guid> _gymIds = new();
 
-    public Subscription(Guid? id, SubscriptionType subscriptionType, Guid adminId) 
+    public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null)
         : base(id ?? Guid.NewGuid())
     {
         _subscriptionType = subscriptionType;

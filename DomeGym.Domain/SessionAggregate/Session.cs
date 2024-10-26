@@ -15,7 +15,7 @@ public class Session : AggregateRoot
     public DateOnly Date { get; }
     public TimeRange Time { get; }
 
-    public Session(Guid? id, Guid trainerId, int maxParticipantCount, DateOnly date, TimeRange time) 
+    public Session(Guid trainerId, int maxParticipantCount, DateOnly date, TimeRange time, Guid? id = null)
         : base(id ?? Guid.NewGuid())
     {
         _trainerId = trainerId;

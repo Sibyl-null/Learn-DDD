@@ -7,12 +7,12 @@ public class Schedule : Entity
 {
     public static Schedule Empty()
     {
-        return new Schedule(Guid.NewGuid());
+        return new Schedule();
     }
 
     private readonly Dictionary<DateOnly, List<TimeRange>> _calendar;
 
-    public Schedule(Guid? id, Dictionary<DateOnly, List<TimeRange>>? calendar = null) 
+    public Schedule(Dictionary<DateOnly, List<TimeRange>>? calendar = null, Guid? id = null) 
         : base(id ?? Guid.NewGuid())
     {
         _calendar = calendar ?? new();
